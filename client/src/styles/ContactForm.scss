@@ -1,0 +1,145 @@
+.contact-card {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  background: #f1f8fc;
+  border: 2px solid #0074c7;
+  padding: 30px 32px;
+  border-radius: 14px;
+  font-family: "Inter", sans-serif;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    text-align: center;
+    color: #00497c;
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: #384050;
+    margin-bottom: 20px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    position: relative;
+
+    label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #384050;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      border: 2px solid #a7c8e8;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.2s;
+
+      &:focus {
+        border-color: #00497c;
+      }
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    .msg {
+      font-size: 13px;
+      margin-top: 4px;
+
+      &.error {
+        color: #cd2c2e;
+      }
+
+      &.success {
+        color: #82b864;
+      }
+    }
+
+    /* Normal */
+    &.default input,
+    &.default textarea {
+      border-color: #a7c8e8;
+    }
+
+    /* Error */
+    &.error input,
+    &.error textarea {
+      border-color: #cd2c2e;
+    }
+
+    /* Success */
+    &.success input,
+    &.success textarea {
+      border-color: #82b864;
+    }
+  }
+
+  .info {
+    font-size: 12.5px;
+    color: #384050;
+    margin: 15px 0 25px;
+    line-height: 1.4;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .back {
+      background: #e2ecf4;
+      color: #294b63;
+
+      &:hover {
+        background: #d0e0ed;
+      }
+    }
+
+    .send {
+      background: #0074c7;
+      color: white;
+
+      &:hover {
+        background: #00497c;
+      }
+    }
+  }
+}
+
+/* RESPONSIVE */
+@media (max-width: 480px) {
+  .contact-card {
+    padding: 22px;
+
+    .buttons {
+      flex-direction: column;
+      gap: 12px;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

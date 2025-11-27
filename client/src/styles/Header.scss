@@ -1,0 +1,81 @@
+.header {
+  background-color: #ffffff; // fond clair
+  border-bottom: 1px solid #eaeaea;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+
+    .logo-img {
+      height: 45px;   // ajuste la taille du logo
+      width: auto;
+    }
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+
+    li {
+      list-style: none;
+    }
+
+    .nav-button {
+      display: inline-block;
+      background-color: #0074C7;   // bleu
+      color: #F1F8FC;              // texte blanc
+      padding: 8px 16px;
+      border-radius: 25px;         // arrondi
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: darken(#0074C7, 10%); // bleu plus foncé au survol
+        transform: scale(1.05);                 // petit zoom
+      }
+
+      &:active {
+        transform: scale(0.95);                 // effet pression au clic
+      }
+    }
+  }
+
+  form {
+    input.form-control {
+      border-radius: 20px;
+    }
+
+    button {
+      border-radius: 20px;
+    }
+  }
+}
+
+/* Responsive : menu en colonne sur mobile */
+@media (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+
+    .nav-links {
+      flex-direction: column;
+
+      li {
+        margin: 5px 0;
+      }
+    }
+
+    form {
+      width: 100%;
+      margin-top: 10px;
+
+      input.form-control {
+        flex: 1;
+      }
+    }
+  }
+}
