@@ -1,50 +1,106 @@
+@import 'variables';
+@import 'mixins';
+
 .home {
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+}
 
-  &__main {
-    flex: 1;
-    padding: 2rem;
-    background-color: #f8f2fc;
+.home__main {
+  flex: 1;
+  padding: 40px;
+}
+
+.home__intro {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 30px;
+  margin-bottom: 60px;
+}
+
+.home__intro-text {
+  flex: 1;
+  min-width: 280px;
+
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: $color-blue-dark; // cohérence avec ta palette
   }
 
-  &__intro {
-    background-color: #f8f2fc;
-    padding: 2rem;
-    border-radius: 8px;
-    margin-bottom: 2rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  ol {
+    padding-left: 20px;
+    font-size: 1.1rem;
+    color: $color-gray-dark;
+  }
+}
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
+.home__intro-image {
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
 
-    p {
-      font-size: 1.2rem;
-      margin-bottom: 1rem;
-    }
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+}
 
-    ol {
-      padding-left: 1.5rem;
+.home__featured {
+  text-align: center;
 
-      li {
-        margin-bottom: 0.5rem;
-      }
-    }
+  h2 {
+    font-size: 1.8rem;
+    margin-bottom: 30px;
+    color: $color-blue-primary;
+  }
+}
+
+.home__artisan-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
+}
+
+/* 📱 Responsive avec mixins */
+@include respond-to(md) {
+  .home__main {
+    padding: 20px;
   }
 
-  &__featured {
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
+  .home__intro {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
 
-    .home__cards {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 1.5rem;
-    }
+  .home__intro-text h1 {
+    font-size: 1.6rem;
+  }
+
+  .home__intro-text ol {
+    font-size: 1rem;
+  }
+
+  .home__featured h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@include respond-to(sm) {
+  .home__main {
+    padding: 15px;
+  }
+
+  .home__intro-text h1 {
+    font-size: 1.4rem;
+  }
+
+  .home__featured h2 {
+    font-size: 1.3rem;
   }
 }

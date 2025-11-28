@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './Header';
 import Footer from './Footer';
 import ArtisanCard from './ArtisanCard';
+import designImage from '../assets/images/Design.png'; // ajuste le chemin si besoin
 import './Home.scss';
 
 const artisansDuMois = [
@@ -32,19 +33,23 @@ const Home = () => {
 
       <main className="home__main">
         <section className="home__intro">
-          <h1>Trouve ton artisan !</h1>
-          <p>Avec la région Auvergne-Rhône-Alpes</p>
-          <ol>
-            <li>Choisir la catégorie d'artisanat dans le menu.</li>
-            <li>Choisir un artisan.</li>
-            <li>Le contacter via le formulaire de contact.</li>
-            <li>Une réponse sera apportée sous 48h.</li>
-          </ol>
+          <div className="home__intro-text">
+            <h1>Comment trouver mon artisan ?</h1>
+            <ol>
+              <li>Choisir la catégorie d'artisanat dans le menu.</li>
+              <li>Choisir un artisan.</li>
+              <li>Le contacter via le formulaire de contact.</li>
+              <li>Une réponse sera apportée sous 48h.</li>
+            </ol>
+          </div>
+          <div className="home__intro-image">
+            <img src={designImage} alt="Design illustration" />
+          </div>
         </section>
 
         <section className="home__featured">
           <h2>Artisans du mois :</h2>
-          <div className="home__cards">
+          <div className="home__artisan-list">
             {artisansDuMois.map((artisan, index) => (
               <ArtisanCard key={index} {...artisan} />
             ))}

@@ -1,0 +1,17 @@
+// 🎨 Palette de couleurs (selon le brief PDF)
+$color-blue-light: #f1f8fc;
+$color-blue-primary: #0074c7;
+$color-blue-dark: #00497c;
+$color-gray-dark: #384050;
+$color-red-accent: #cd2c2e;
+$color-green-light: #82b864;
+
+// 🖋️ Typographie
+$font-family-base: 'Graphik', 'Inter', sans-serif;
+
+// 📐 Breakpoints (mobile-first, cohérents avec Bootstrap)
+$breakpoint-sm: 576px;   // Smartphones
+$breakpoint-md: 768px;   // Tablettes
+$breakpoint-lg: 992px;   // Petits laptops
+$breakpoint-xl: 1200px;  // Écrans larges
+$breakpoint-xxl: 1400px; // Très grands écrans

@@ -1,17 +1,20 @@
+@import 'variables';
+@import 'mixins';
+
 .contact-card {
   width: 100%;
   max-width: 520px;
   margin: auto;
-  background: #f1f8fc;
-  border: 2px solid #0074c7;
+  background: $color-blue-light; // #f1f8fc
+  border: 2px solid $color-blue-primary; // #0074c7
   padding: 30px 32px;
   border-radius: 14px;
-  font-family: "Inter", sans-serif;
+  font-family: $font-family-base;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
 
   h2 {
     text-align: center;
-    color: #00497c;
+    color: $color-blue-dark; // #00497c
     font-size: 22px;
     margin-bottom: 4px;
   }
@@ -19,7 +22,7 @@
   .subtitle {
     text-align: center;
     font-size: 13px;
-    color: #384050;
+    color: $color-gray-dark; // #384050
     margin-bottom: 20px;
   }
 
@@ -32,13 +35,13 @@
     label {
       font-size: 14px;
       margin-bottom: 6px;
-      color: #384050;
+      color: $color-gray-dark;
       font-weight: 600;
     }
 
     input,
     textarea {
-      border: 2px solid #a7c8e8;
+      border: 2px solid lighten($color-blue-primary, 30%); // #a7c8e8
       border-radius: 8px;
       padding: 10px 12px;
       font-size: 15px;
@@ -46,7 +49,7 @@
       transition: 0.2s;
 
       &:focus {
-        border-color: #00497c;
+        border-color: $color-blue-dark;
       }
     }
 
@@ -60,36 +63,34 @@
       margin-top: 4px;
 
       &.error {
-        color: #cd2c2e;
+        color: $color-red-accent; // #cd2c2e
       }
 
       &.success {
-        color: #82b864;
+        color: $color-green-light; // #82b864
       }
     }
 
-    /* Normal */
+    /* États */
     &.default input,
     &.default textarea {
-      border-color: #a7c8e8;
+      border-color: lighten($color-blue-primary, 30%);
     }
 
-    /* Error */
     &.error input,
     &.error textarea {
-      border-color: #cd2c2e;
+      border-color: $color-red-accent;
     }
 
-    /* Success */
     &.success input,
     &.success textarea {
-      border-color: #82b864;
+      border-color: $color-green-light;
     }
   }
 
   .info {
     font-size: 12.5px;
-    color: #384050;
+    color: $color-gray-dark;
     margin: 15px 0 25px;
     line-height: 1.4;
   }
@@ -109,27 +110,27 @@
     }
 
     .back {
-      background: #e2ecf4;
-      color: #294b63;
+      background: lighten($color-blue-light, 5%); // #e2ecf4
+      color: darken($color-blue-dark, 20%); // #294b63
 
       &:hover {
-        background: #d0e0ed;
+        background: lighten($color-blue-light, 10%); // #d0e0ed
       }
     }
 
     .send {
-      background: #0074c7;
-      color: white;
+      background: $color-blue-primary;
+      color: #fff;
 
       &:hover {
-        background: #00497c;
+        background: $color-blue-dark;
       }
     }
   }
 }
 
-/* RESPONSIVE */
-@media (max-width: 480px) {
+/* 📱 Responsive avec mixins */
+@include respond-to(sm) {
   .contact-card {
     padding: 22px;
 

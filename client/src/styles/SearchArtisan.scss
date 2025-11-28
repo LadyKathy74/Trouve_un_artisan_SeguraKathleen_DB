@@ -1,5 +1,8 @@
+@import 'variables';
+@import 'mixins';
+
 .search-artisan {
-  background-color: #f8f2fc;
+  background-color: lighten($color-blue-light, 3%); // #f8f2fc
   padding: 2rem;
   border-radius: 8px;
   max-width: 600px;
@@ -8,7 +11,7 @@
   h2 {
     text-align: center;
     margin-bottom: 1.5rem;
-    color: #384050;
+    color: $color-gray-dark; // #384050
   }
 
   .form-group {
@@ -19,9 +22,10 @@
     input,
     select {
       padding: 0.8rem;
-      border: 1px solid #ccc;
+      border: 1px solid lighten($color-gray-dark, 50%); // #ccc
       border-radius: 4px;
       font-size: 1rem;
+      font-family: $font-family-base;
     }
   }
 
@@ -38,16 +42,43 @@
       border-radius: 4px;
       cursor: pointer;
       margin: 0 0.5rem;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
     }
 
     .search-btn {
-      background-color: #0074c7;
-      color: white;
+      background-color: $color-blue-primary; // #0074c7
+      color: #fff;
+
+      &:hover {
+        background-color: darken($color-blue-primary, 10%);
+      }
     }
 
     .show-btn {
-      background-color: #00497c;
-      color: white;
+      background-color: $color-blue-dark; // #00497c
+      color: #fff;
+
+      &:hover {
+        background-color: lighten($color-blue-dark, 5%);
+      }
+    }
+  }
+}
+
+/* 📱 Responsive avec mixins */
+@include respond-to(sm) {
+  .search-artisan {
+    padding: 1.5rem;
+
+    .button-group {
+      flex-direction: column;
+      gap: 12px;
+
+      button {
+        width: 100%;
+        margin: 0;
+      }
     }
   }
 }
