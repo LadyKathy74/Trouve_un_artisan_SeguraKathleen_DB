@@ -1,24 +1,11 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+# Ignorer les fichiers temporaires
+*.log
+*.tmp
 
-# dependencies
-/node_modules
-/.pnp
-.pnp.js
+# Ignorer un dossier spécifique
+/node_modules/
+/dist/
+.env/
 
-# testing
-/coverage
-
-# production
-/build
-
-# misc
-.DS_Store
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
-.env
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# Ignorer un fichier précis
+secret.txt
