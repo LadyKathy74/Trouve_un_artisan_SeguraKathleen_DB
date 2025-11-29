@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import SearchArtisan from './SearchArtisan';
-import ArtisanCard from './ArtisanCard';
-import './ArtisanList.scss';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import SearchArtisan from '../components/SearchArtisan';
+import ArtisanCard from '../components/ArtisanCard';
+import '../styles/ArtisanList.scss';
+
 
 const artisansData = [
   {

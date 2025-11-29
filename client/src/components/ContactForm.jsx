@@ -1,7 +1,6 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import React, { useState } from "react";
-import "./ContactForm.scss";
+import { Link } from "react-router-dom";
+import "../styles/ContactForm.scss";
 
 export default function ContactForm() {
   const [fields, setFields] = useState({

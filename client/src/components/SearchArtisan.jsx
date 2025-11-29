@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './SearchArtisan.scss';
+import '../styles/SearchArtisan.scss';
 
 const SearchArtisan = ({ onSearch, onShowAll }) => {
   const [filters, setFilters] = useState({

@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import ArtisanCard from './ArtisanCard';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ArtisanCard from '../components/ArtisanCard';
 import designImage from '../assets/images/Design.png'; // ajuste le chemin si besoin
-import './Home.scss';
+import '../styles/Home.scss';
 
 const artisansDuMois = [
   {

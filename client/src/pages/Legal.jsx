@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import constructionImage from '../assets/images/En Construction.png'; // ajuste le chemin si besoin
-import './Legal.css'; // optionnel pour styliser
+import '../styles/Legal.scss'; // optionnel pour styliser
 
 const Legal = () => {
   return (

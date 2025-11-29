@@ -1,55 +1,51 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import './Header.scss';
+// React Component: Header.jsx
+import React, { useState } from "react";
+import "../styles/Header.scss";
+import logo from "../assets/images/Logo.png"; // ajuste le chemin si besoin
 
-function Header() {
+export default function Header() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
   return (
-    <header className="header d-flex align-items-center justify-content-between px-3 py-2">
-      
-      {/* Logo */}
-      <Link to="/" className="logo">
-        <img
-          src="./images/logo.png"        // chemin vers ton image
-          alt="Trouve ton artisan"      // texte alternatif
-          className="logo-img"
-        />
-      </Link>
+    <header className="header">
 
-      {/* Navigation */}
-      <nav className="d-flex align-items-center">
-        <ul className="nav-links d-flex list-unstyled mb-0">
-          <li className="mx-2">
-            <Link to="/Accueil" className="nav-button">Accueil</Link>
-          </li>
-          <li className="mx-2">
-            <Link to="/Batiment" className="nav-button">Bâtiment</Link>
-          </li>
-          <li className="mx-2">
-            <Link to="/Services" className="nav-button">Services</Link>
-          </li>
-          <li className="mx-2">
-            <Link to="/Fabrication" className="nav-button">Fabrication</Link>
-          </li>
-          <li className="mx-2">
-            <Link to="/Alimentation" className="nav-button">Alimentation</Link>
-          </li>
+      {/* LOGO */}
+      <a href="#" className="logo">
+        <img src={logo} alt="Logo" className="logo-img" />
+      </a>
+
+      {/* HAMBURGER */}
+      <button
+        className={`hamburger ${menuOpen ? "open" : ""}`}
+        onClick={() => setMenuOpen(!menuOpen)}
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      {/* MENU SLIDE */}
+      <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
+        <ul className="nav-links">
+          <li><a className="nav-button" href="#">Accueil</a></li>
+          <li><a className="nav-button" href="#">Bâtiment</a></li>
+          <li><a className="nav-button" href="#">Services</a></li>
+          <li><a className="nav-button" href="#">Fabrication</a></li>
+          <li><a className="nav-button" href="#">Alimentation</a></li>
         </ul>
 
-        {/* Barre de recherche */}
-        <form className="d-flex ms-3" role="search">
-          <input
-            className="form-control me-2"
-            type="search"
-            placeholder="Rechercher..."
-            aria-label="Search"
-          />
-          <button className="btn btn-outline-success" type="submit">
-            Search
-          </button>
+      {/* Barre de recherche visible en DESKTOP + TABLETTE */}
+      <div className="search-dt">
+            <input type="text" className="form-control" placeholder="Rechercher..." />
+            <button type="submit">🔍</button>
+      </div>
+
+        {/* Recherche mobile */}
+        <form className="search-mobile">
+          <input type="text" className="form-control" placeholder="Rechercher..." />
+          <button type="submit">🔍</button>
         </form>
       </nav>
     </header>
   );
 }
-
-export default Header;

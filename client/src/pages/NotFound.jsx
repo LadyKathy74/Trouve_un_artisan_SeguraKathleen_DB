@@ -1,8 +1,8 @@
 import React from 'react';
-import Header from './Header';
-import Footer from './Footer';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 import errorImage from '../assets/images/404.png'; // ajuste le chemin si nécessaire
-import './NotFound.css'; // optionnel si tu veux styliser la page
+import '../styles/NotFound.scss'; // optionnel si tu veux styliser la page
 
 const NotFound = () => {
   return (

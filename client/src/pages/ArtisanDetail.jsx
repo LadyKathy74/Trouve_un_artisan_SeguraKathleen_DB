@@ -1,9 +1,9 @@
 // ArtisanDetail.jsx
 import React, { useState } from 'react';
-import Header from './Header';
-import Footer from './Footer';
-import ContactForm from './ContactForm';
-import './ArtisanDetail.scss';
+import Header from '../components/Header';
+import Footer from '../components/Footer';
+import ContactForm from '../components/ContactForm';
+import '../styles/ArtisanDetail.scss';
 
 const ArtisanDetail = () => {
   const [rating, setRating] = useState(0);

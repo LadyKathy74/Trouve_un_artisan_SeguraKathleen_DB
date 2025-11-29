@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./ArtisanCard.scss";
+import "../styles/ArtisanCard.scss";
 
 export default function ArtisanCard({ rating, title, category, description, city }) {
   return (
