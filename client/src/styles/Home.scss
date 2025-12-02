@@ -1,0 +1,169 @@
+@import '../styles/_variables.scss';
+@import '../styles/_mixins.scss';
+
+.home {
+  &__main {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  /* INTRO */
+  &__intro {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2.5rem;
+
+    &-text {
+      flex: 1;
+
+      .home__title,
+      h1 {
+        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+        line-height: 1.1;
+        color: #0f1f2f;
+        position: relative;
+        padding-left: 0;
+      }
+
+      .home__title::after,
+      h1::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -10px;
+        width: 3cm;
+        max-width: 100%;
+        height: 4px;
+        background: #00a550;
+        border-radius: 2px;
+      }
+
+      .home__steps,
+      ol {
+        margin: 1rem 0 0 1.25rem;
+        color: #334155;
+      }
+    }
+
+    &-image {
+      flex: 0 0 320px;
+      img {
+        max-width: 100%;
+        height: auto;
+        display: block;
+      }
+    }
+  }
+
+  /* SECTION ARTISANS */
+  &__featured {
+    margin-top: 1.5rem;
+
+    .home__subtitle,
+    h2 {
+      margin: 0 0 1rem 0;
+      font-size: 1.5rem;
+      color: #0f1f2f;
+      position: relative;
+      padding-left: 0;
+    }
+
+    .home__subtitle::after,
+    h2::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -8px;
+      width: 3cm;
+      max-width: 100%;
+      height: 4px;
+      background: #00a550;
+      border-radius: 2px;
+    }
+
+    /* Grille : chaque cellule étire son contenu, cartes de même hauteur */
+    .home__artisan-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+      align-items: stretch; /* étire les cellules verticalement */
+      margin-top: 1rem;
+    }
+
+    /* chaque item devient un conteneur flex pour forcer la carte à 100% */
+    .home__artisan-item {
+      display: flex;
+      align-items: stretch;
+      justify-content: stretch;
+    }
+
+    /* si vous utilisez .home__artisan-item > ArtisanCard, la carte doit avoir height:100% */
+    .home__artisan-item > .artisan-card {
+      height: 100%;
+    }
+  }
+}
+
+/* Responsive adjustments */
+@include respond-to(lg) { /* ≤ 1024px */
+  .home__intro {
+    &-image {
+      flex: 0 0 260px;
+    }
+  }
+}
+
+@include respond-to(md) { /* ≤ 768px */
+  .home__intro {
+    flex-direction: column;
+    align-items: stretch;
+
+    &-text {
+      order: 1;
+    }
+
+    &-image {
+      order: 2;
+      flex: 0 0 auto;
+      width: 100%;
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+
+  /* limiter la largeur visuelle de la ligne sur petits écrans */
+  .home__title::after,
+  .home__subtitle::after,
+  h1::after,
+  h2::after {
+    width: min(3cm, 40%);
+  }
+
+  .home__artisan-list {
+    gap: 0.75rem;
+  }
+}
+
+@include respond-to(sm) { /* ≤ 576px */
+  .home__title,
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  .home__subtitle,
+  h2 {
+    font-size: 1.125rem;
+  }
+
+  .home__title::after,
+  .home__subtitle::after,
+  h1::after,
+  h2::after {
+    width: min(3cm, 50%);
+  }
+}

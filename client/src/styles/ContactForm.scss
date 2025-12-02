@@ -1,0 +1,146 @@
+@import 'variables';
+@import 'mixins';
+
+.contact-card {
+  width: 100%;
+  max-width: 520px;
+  margin: auto;
+  background: $color-blue-light; // #f1f8fc
+  border: 2px solid $color-blue-primary; // #0074c7
+  padding: 30px 32px;
+  border-radius: 14px;
+  font-family: $font-family-base;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    text-align: center;
+    color: $color-blue-dark; // #00497c
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .subtitle {
+    text-align: center;
+    font-size: 13px;
+    color: $color-gray-dark; // #384050
+    margin-bottom: 20px;
+  }
+
+  .field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 18px;
+    position: relative;
+
+    label {
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: $color-gray-dark;
+      font-weight: 600;
+    }
+
+    input,
+    textarea {
+      border: 2px solid lighten($color-blue-primary, 30%); // #a7c8e8
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 15px;
+      outline: none;
+      transition: 0.2s;
+
+      &:focus {
+        border-color: $color-blue-dark;
+      }
+    }
+
+    textarea {
+      height: 100px;
+      resize: none;
+    }
+
+    .msg {
+      font-size: 13px;
+      margin-top: 4px;
+
+      &.error {
+        color: $color-red-accent; // #cd2c2e
+      }
+
+      &.success {
+        color: $color-green-light; // #82b864
+      }
+    }
+
+    /* États */
+    &.default input,
+    &.default textarea {
+      border-color: lighten($color-blue-primary, 30%);
+    }
+
+    &.error input,
+    &.error textarea {
+      border-color: $color-red-accent;
+    }
+
+    &.success input,
+    &.success textarea {
+      border-color: $color-green-light;
+    }
+  }
+
+  .info {
+    font-size: 12.5px;
+    color: $color-gray-dark;
+    margin: 15px 0 25px;
+    line-height: 1.4;
+  }
+
+  .buttons {
+    display: flex;
+    justify-content: space-between;
+
+    button {
+      padding: 10px 20px;
+      font-size: 15px;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      transition: 0.2s;
+    }
+
+    .back {
+      background: lighten($color-blue-light, 5%); // #e2ecf4
+      color: darken($color-blue-dark, 20%); // #294b63
+
+      &:hover {
+        background: lighten($color-blue-light, 10%); // #d0e0ed
+      }
+    }
+
+    .send {
+      background: $color-blue-primary;
+      color: #fff;
+
+      &:hover {
+        background: $color-blue-dark;
+      }
+    }
+  }
+}
+
+/* 📱 Responsive avec mixins */
+@include respond-to(sm) {
+  .contact-card {
+    padding: 22px;
+
+    .buttons {
+      flex-direction: column;
+      gap: 12px;
+
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

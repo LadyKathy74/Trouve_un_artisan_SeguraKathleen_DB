@@ -1,0 +1,100 @@
+@import './variables';
+@import './mixins';
+@import './Header.scss';
+@import './Footer.scss';
+@import './ArtisanCard.scss';
+@import './ContactForm.scss';
+@import './ArtisanList.scss';
+@import './Home.scss';
+@import './SearchArtisan.scss';
+@import './ArtisanDetail.scss';
+@import './NotFound.scss';
+@import './Legal.scss';
+
+// 🌐 Importation de la police Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+// 🎨 Palette personnalisée
+$blue-primary: #0074c7;
+$green-primary: #00794c;
+$gray-dark: #384050;
+$red-accent: #cd2c2c;
+$blue-light: #f1f8fc;
+$green-light: #82b864;
+
+// 🖋️ Typographie
+$font-family: 'Inter', sans-serif;
+
+// 📱 Breakpoints
+$breakpoint-sm: 576px;
+$breakpoint-md: 768px;
+$breakpoint-lg: 992px;
+$breakpoint-xl: 1200px;
+
+// 🔄 Reset CSS
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  font-family: $font-family;
+  font-size: 16px;
+  color: $gray-dark;
+  background-color: $blue-light;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+// 🔗 Liens
+a {
+  color: $blue-primary;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+// 🧭 Layout global
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+// 🖥️ Titres
+h1, h2, h3, h4 {
+  font-weight: 600;
+  margin-bottom: 20px;
+  color: $gray-dark;
+}
+
+// 📱 Responsive images
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// 🧩 Sections
+section {
+  margin-bottom: 60px;
+}
+
+// 📱 Responsive helpers
+.hide-on-mobile {
+  display: block;
+
+  @media (max-width: $breakpoint-md) {
+    display: none;
+  }
+}
+
+.show-on-mobile {
+  display: none;
+
+  @media (max-width: $breakpoint-md) {
+    display: block;
+  }
+}

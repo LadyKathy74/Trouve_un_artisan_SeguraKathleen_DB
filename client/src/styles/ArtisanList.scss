@@ -1,0 +1,65 @@
+@import 'variables';
+@import 'mixins';
+
+.artisan-list-page {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  main {
+    flex: 1;
+    padding: 2rem;
+    background-color: $color-blue-light; // #f1f8fc
+  }
+
+  .search-zone {
+    margin-bottom: 2rem;
+  }
+
+  .results-zone {
+    h2 {
+      font-size: 1.8rem;
+      margin-bottom: 1rem;
+      color: $color-gray-dark; // #384050
+    }
+
+    .artisan-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+  }
+}
+
+/* 📱 Responsive avec mixins */
+@include respond-to(md) {
+  .artisan-list-page {
+    main {
+      padding: 1.5rem;
+    }
+
+    .results-zone h2 {
+      font-size: 1.6rem;
+    }
+
+    .artisan-grid {
+      gap: 1rem;
+    }
+  }
+}
+
+@include respond-to(sm) {
+  .artisan-list-page {
+    main {
+      padding: 1rem;
+    }
+
+    .results-zone h2 {
+      font-size: 1.4rem;
+    }
+
+    .artisan-grid {
+      grid-template-columns: 1fr; // une seule colonne sur mobile
+    }
+  }
+}

@@ -1,0 +1,136 @@
+@import 'variables';
+@import 'mixins';
+
+/* ArtisanCard.scss
+   Variables attendues : $color-blue-light, $color-blue-primary, $color-blue-dark, $color-gray-dark, $font-family-base
+   Remplacez les variables par des valeurs hex si vous n'utilisez pas de variables.
+*/
+
+.artisan-card {
+  /* structure générale */
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 18px 20px;
+  width: 100%;
+  height: 100%; /* important pour que la carte remplisse la cellule parent */
+  border-radius: 14px;
+  background: $color-blue-light; /* fallback: #f1f8fc */
+  border: 2px solid $color-blue-primary; /* fallback: #0074c7 */
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  font-family: $font-family-base;
+  color: $color-blue-dark;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+
+  &:hover,
+  &:focus-within {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+  }
+
+  /* header : note + catégorie */
+  &__header,
+  .artisan-card-top { /* compatibilité avec anciennes classes */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  /* rating */
+  &__rating,
+  .artisan-rating {
+    display: inline-flex;
+    gap: 6px;
+    align-items: center;
+    font-size: 18px;
+    line-height: 1;
+
+    .star,
+    .artisan-card__star {
+      display: inline-block;
+      font-size: 18px;
+      line-height: 1;
+      color: #e3e7ee; /* vide */
+      transition: color 0.12s ease, transform 0.12s ease;
+    }
+
+    .star.filled,
+    .artisan-card__star--filled {
+      color: #ffc403; /* pleine */
+    }
+  }
+
+  /* catégorie */
+  &__category,
+  .artisan-category {
+    font-weight: 600;
+    color: $color-blue-dark;
+    background: #f0f6ff;
+    border: 1px solid #d6e7ff;
+    padding: 6px 10px;
+    border-radius: 999px;
+    font-size: 13px;
+    white-space: nowrap;
+  }
+
+  /* titre / nom */
+  &__title,
+  .artisan-name {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 700;
+    color: #0f1f2f;
+  }
+
+  /* description : prend l'espace restant pour aligner le footer */
+  &__description,
+  .artisan-description {
+    margin: 0;
+    font-size: 14px;
+    color: $color-gray-dark;
+    line-height: 1.45;
+    flex: 1 1 auto; /* s'étire pour uniformiser la hauteur des cartes */
+    min-height: 48px;
+  }
+
+  /* footer / localisation */
+  &__footer,
+  .artisan-card__footer,
+  .artisan-location {
+    margin-top: 8px;
+    font-size: 14px;
+    color: $color-gray-dark;
+    font-weight: 600;
+    flex: 0 0 auto;
+  }
+
+  /* petites variantes utilitaires */
+  &--compact {
+    padding: 12px 14px;
+  }
+}
+
+/* accessibilité : focus visible */
+.artisan-card:focus-within {
+  outline: 3px solid rgba(0, 116, 199, 0.12);
+  outline-offset: 2px;
+}
+
+/* responsive interne */
+@media (max-width: 768px) {
+  .artisan-card {
+    padding: 14px 16px;
+
+    &__title,
+    .artisan-name {
+      font-size: 17px;
+    }
+
+    &__description,
+    .artisan-description {
+      font-size: 13.5px;
+    }
+  }
+}

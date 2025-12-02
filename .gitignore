@@ -1,0 +1,11 @@
+# Ignorer les fichiers temporaires
+*.log
+*.tmp
+
+# Ignorer un dossier spécifique
+/node_modules/
+/dist/
+.env/
+
+# Ignorer un fichier précis
+secret.txt

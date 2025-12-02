@@ -1,0 +1,136 @@
+@import 'variables';
+@import 'mixins';
+
+.artisan-detail-page {
+  font-family: $font-family-base;
+  background-color: $color-blue-light; // #f1f8fc
+  color: $color-gray-dark;             // #384050
+}
+
+.artisan-detail-content {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.intro-section,
+.rating-section,
+.contact-section {
+  background: #fff;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+
+  h1, h2 {
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin: 0.5rem 0;
+  }
+
+  .website-link {
+    display: inline-block;
+    margin-top: 1rem;
+    color: $color-blue-primary; // #0074c7
+    text-decoration: underline;
+    font-weight: bold;
+  }
+}
+
+/* ⭐ Affichage fixe des étoiles (notation artisan) */
+.rating-display {
+  font-size: 1.6rem;
+  color: #d4af37; // doré
+  margin-bottom: 1rem;
+}
+
+/* ⭐ Section notation interactive */
+.rating-section {
+  .stars {
+    font-size: 2rem;
+    cursor: pointer;
+    display: flex;
+    gap: 0.5rem;
+
+    .star {
+      color: #ccc;
+      transition: color 0.2s;
+
+      &.filled {
+        color: #d4af37;
+      }
+
+      &:hover {
+        color: #ffcc00;
+      }
+    }
+  }
+
+  .rating-message {
+    margin-top: 1rem;
+    font-style: italic;
+    color: $color-gray-dark;
+  }
+}
+
+/* 📱 Responsive design avec mixins */
+
+/* Tablette ≤ 768px */
+@include respond-to(md) {
+  .artisan-detail-content {
+    padding: 1.5rem;
+  }
+
+  .intro-section,
+  .rating-section,
+  .contact-section {
+    padding: 1.5rem;
+  }
+
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  h2 {
+    font-size: 1.4rem;
+  }
+
+  .stars {
+    font-size: 1.6rem;
+  }
+}
+
+/* Mobile ≤ 576px */
+@include respond-to(sm) {
+  .artisan-detail-content {
+    padding: 1rem;
+  }
+
+  .intro-section,
+  .rating-section,
+  .contact-section {
+    padding: 1rem;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+
+  h2 {
+    font-size: 1.2rem;
+  }
+
+  p {
+    font-size: 0.9rem;
+  }
+
+  .stars {
+    font-size: 1.3rem;
+  }
+
+  .website-link {
+    font-size: 0.9rem;
+  }
+}
