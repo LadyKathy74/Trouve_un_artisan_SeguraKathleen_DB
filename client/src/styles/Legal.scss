@@ -1,5 +1,5 @@
-@import 'variables';
-@import 'mixins';
+@import '../styles/_mixins.scss';
+@import '../styles/_variables.scss';
 
 .legal-page {
   display: flex;

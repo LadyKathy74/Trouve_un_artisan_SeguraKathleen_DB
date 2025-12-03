@@ -1,18 +1,28 @@
 // React Component: Header.jsx
 import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/Header.scss";
 import logo from "../assets/images/Logo.png"; // ajuste le chemin si besoin
 
 export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchTerm.trim() !== "") {
+      navigate(`/artisans?search=${searchTerm}`);
+    }
+  };
 
   return (
     <header className="header">
 
       {/* LOGO */}
-      <a href="#" className="logo">
+      <Link to="/" className="logo">
         <img src={logo} alt="Logo" className="logo-img" />
-      </a>
+      </Link>
 
       {/* HAMBURGER */}
       <button
@@ -27,22 +37,34 @@ export default function Header() {
       {/* MENU SLIDE */}
       <nav className={`nav-menu ${menuOpen ? "open" : ""}`}>
         <ul className="nav-links">
-          <li><a className="nav-button" href="#">Accueil</a></li>
-          <li><a className="nav-button" href="#">Bâtiment</a></li>
-          <li><a className="nav-button" href="#">Services</a></li>
-          <li><a className="nav-button" href="#">Fabrication</a></li>
-          <li><a className="nav-button" href="#">Alimentation</a></li>
+          <li><Link className="nav-button" to="/">Accueil</Link></li>
+          <li><Link className="nav-button" to="/batiment">Bâtiment</Link></li>
+          <li><Link className="nav-button" to="/services">Services</Link></li>
+          <li><Link className="nav-button" to="/fabrication">Fabrication</Link></li>
+          <li><Link className="nav-button" to="/alimentation">Alimentation</Link></li>
         </ul>
 
-      {/* Barre de recherche visible en DESKTOP + TABLETTE */}
-      <div className="search-dt">
-            <input type="text" className="form-control" placeholder="Rechercher..." />
-            <button type="submit">🔍</button>
-      </div>
+        {/* Barre de recherche visible en DESKTOP + TABLETTE */}
+        <form className="search-dt" onSubmit={handleSearch}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Rechercher..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button type="submit">🔍</button>
+        </form>
 
         {/* Recherche mobile */}
-        <form className="search-mobile">
-          <input type="text" className="form-control" placeholder="Rechercher..." />
+        <form className="search-mobile" onSubmit={handleSearch}>
+          <input
+            type="text"
+            className="form-control"
+            placeholder="Rechercher..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
           <button type="submit">🔍</button>
         </form>
       </nav>

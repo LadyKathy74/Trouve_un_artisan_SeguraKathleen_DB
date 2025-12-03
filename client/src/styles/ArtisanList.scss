@@ -1,6 +1,26 @@
-@import 'variables';
-@import 'mixins';
+@import '../styles/_mixins.scss';
+@import '../styles/_variables.scss';
 
+/* Ligne verte sous les titres */
+.title-with-line {
+  position: relative;
+  display: inline-block;
+  margin-bottom: 1.5rem;
+  color: #0074c7;
+  font-weight: 600;
+
+  &::after {
+    content: "";
+    display: block;
+    width: 3cm; /* ligne verte de 3 cm */
+    height: 4px;
+    background-color: green;
+    margin-top: 6px;
+    border-radius: 2px;
+  }
+}
+
+/* ArtisanList styles */
 .artisan-list-page {
   display: flex;
   flex-direction: column;
@@ -19,14 +39,16 @@
   .results-zone {
     h2 {
       font-size: 1.8rem;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
       color: $color-gray-dark; // #384050
     }
 
     .artisan-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 1.5rem;
+      grid-template-columns: repeat(3, 1fr); /* ✅ 3 colonnes fixes */
+      column-gap: 7rem;   /* espacement horizontal entre colonnes */
+      row-gap: 0.5cm;     /* espacement vertical entre lignes */
+      padding: 0 5cm;     /* ✅ écart de 2 cm à droite et à gauche */
     }
   }
 }
@@ -43,7 +65,10 @@
     }
 
     .artisan-grid {
-      gap: 1rem;
+      grid-template-columns: repeat(2, 1fr); /* 2 colonnes sur tablette */
+      column-gap: 2rem;
+      row-gap: 0.5cm;
+      padding: 0 2cm; /* conserve l’écart latéral */
     }
   }
 }
@@ -59,7 +84,9 @@
     }
 
     .artisan-grid {
-      grid-template-columns: 1fr; // une seule colonne sur mobile
+      grid-template-columns: 1fr; /* 1 colonne sur mobile */
+      row-gap: 0.5cm;
+      padding: 0 2cm; /* conserve l’écart latéral */
     }
   }
 }

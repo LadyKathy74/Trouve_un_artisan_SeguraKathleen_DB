@@ -1,84 +1,139 @@
-@import 'variables';
-@import 'mixins';
+@import '../styles/_mixins.scss';
+@import '../styles/_variables.scss';
 
-.search-artisan {
-  background-color: lighten($color-blue-light, 3%); // #f8f2fc
+/* ArtisanSearch.scss */
+
+.search-artisan,
+.artisan-search {
+  min-height: 10vh;
+  display: grid;
+  place-items: center;
+  background: #f2f8fc;
   padding: 2rem;
+  box-sizing: border-box;
+  font-family: "Inter", Arial, sans-serif;
+}
+
+.artisan-search__wrapper {
+  width: 100%;
+  max-width: 960px;
+  background: #f2f8fc;
+  border: 2px solid #e6e6ef;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.10);
+}
+
+.artisan-search__title {
+  margin: 0 0 1.5rem 0;
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #0074c7;
+  text-align: center;
+}
+
+/* Grille : 2 lignes, 3 colonnes égales */
+.artisan-search__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-auto-rows: 1fr;
+  gap: 1.25rem;
+  align-items: center;
+  justify-items: center;
+}
+
+.artisan-search__item {
+  width: 100%;
+  max-width: 280px;
+  display: grid;
+  gap: 0.5rem;
+}
+
+/* Champs de formulaire */
+.input,
+.select {
+  width: 100%;
+  height: 40px;
+  padding: 0 0.75rem;
+  border: 1.5px solid #0074c7;
   border-radius: 8px;
-  max-width: 600px;
-  margin: auto;
+  background: #fff;
+  color: #00497c;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
 
-  h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    color: $color-gray-dark; // #384050
+  &:focus {
+    outline: none;
+    border-color: #6c7bff;
+    box-shadow: 0 0 0 3px rgba(108, 123, 255, 0.15);
+  }
+}
+
+/* Boutons */
+.btn {
+  width: 100%;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.05s ease, box-shadow 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+
+  &:active {
+    transform: translateY(1px);
   }
 
-  .form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  &--primary {
+    background: #0074c7;
+    color: #f2f8fc;
+    box-shadow: 0 6px 14px rgba(108, 123, 255, 0.25);
 
-    input,
-    select {
-      padding: 0.8rem;
-      border: 1px solid lighten($color-gray-dark, 50%); // #ccc
-      border-radius: 4px;
-      font-size: 1rem;
-      font-family: $font-family-base;
+    &:hover {
+      box-shadow: 0 8px 18px rgba(108, 123, 255, 0.35);
     }
   }
 
-  .button-group {
-    display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
+  &--secondary {
+    background: #00497c;
+    color: #f2f8fc;
+    box-shadow: 0 6px 14px rgba(51, 51, 68, 0.08);
 
-    button {
-      flex: 1;
-      padding: 0.8rem;
-      font-size: 1rem;
-      border: none;
-      border-radius: 4px;
-      cursor: pointer;
-      margin: 0 0.5rem;
-      font-weight: 600;
-      transition: background-color 0.2s ease;
-    }
-
-    .search-btn {
-      background-color: $color-blue-primary; // #0074c7
-      color: #fff;
-
-      &:hover {
-        background-color: darken($color-blue-primary, 10%);
-      }
-    }
-
-    .show-btn {
-      background-color: $color-blue-dark; // #00497c
-      color: #fff;
-
-      &:hover {
-        background-color: lighten($color-blue-dark, 5%);
-      }
+    &:hover {
+      box-shadow: 0 8px 18px rgba(51, 51, 68, 0.12);
     }
   }
 }
 
-/* 📱 Responsive avec mixins */
-@include respond-to(sm) {
-  .search-artisan {
-    padding: 1.5rem;
+/* Accessibilité : labels invisibles */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
 
-    .button-group {
-      flex-direction: column;
-      gap: 12px;
+/* Responsive */
+@media (max-width: 900px) {
+  .artisan-search__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
 
-      button {
-        width: 100%;
-        margin: 0;
-      }
-    }
+@media (max-width: 600px) {
+  .artisan-search__grid {
+    grid-template-columns: 1fr;
+    justify-items: stretch;
+  }
+
+  .artisan-search__item {
+    max-width: none;
   }
 }

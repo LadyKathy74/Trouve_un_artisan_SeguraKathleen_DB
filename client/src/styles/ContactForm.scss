@@ -1,5 +1,6 @@
-@import 'variables';
-@import 'mixins';
+@import '../styles/_mixins.scss';
+@import '../styles/_variables.scss';
+
 
 .contact-card {
   width: 100%;

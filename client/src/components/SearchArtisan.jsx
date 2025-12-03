@@ -1,68 +1,102 @@
-import React, { useState } from 'react';
-import '../styles/SearchArtisan.scss';
+import React from "react";
+import "../styles/SearchArtisan.scss";
 
-const SearchArtisan = ({ onSearch, onShowAll }) => {
-  const [filters, setFilters] = useState({
-    name: '',
-    rating: '',
-    specialty: '',
-    location: '',
-  });
+const metiers = [
+  "Plombier",
+  "Électricien",
+  "Menuisier",
+  "Peintre",
+  "Maçon",
+  "Boulanger",
+  "Cordonnier",
+  "Bijoutier",
+  "Coiffeur",
+  "Serrurier",
+  "Ramoneur",
+  "Tapissier",
+  "Horloger",
+  "Soudeur",
+  "Luthier",
+  "Tailleur",
+  "Charpentier",
+  "Carreleur",
+  "Couvreur",
+  "Maréchal-ferrant",
+  "Potier",
+  "Fromager",
+  "Verrier",
+  "Tisserand",
+  "Orfèvre",
+  "Sculpteur",
+  "Forgeron",
+  "Pâtissier",
+  "Chocolatier",
+  "Poissonnier",
+  "Fleuriste"
+  // … ajoutez autant de métiers que nécessaire
+];
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFilters((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSearchClick = () => {
-    if (onSearch) onSearch(filters);
-  };
-
-  const handleShowAllClick = () => {
-    if (onShowAll) onShowAll();
-  };
-
+const SearchArtisan = () => {
   return (
-    <div className="search-artisan">
-      <h2>Recherche d'artisan</h2>
-      <div className="form-group">
-        <input
-          type="text"
-          name="name"
-          placeholder="Par nom..."
-          value={filters.name}
-          onChange={handleChange}
-        />
-        <select name="rating" value={filters.rating} onChange={handleChange}>
-          <option value="">Par note</option>
-          <option value="5">★★★★★</option>
-          <option value="4">★★★★</option>
-          <option value="3">★★★</option>
-          <option value="2">★★</option>
-          <option value="1">★</option>
-        </select>
-        <select name="specialty" value={filters.specialty} onChange={handleChange}>
-          <option value="">Par spécialité</option>
-          <option value="plombier">Plombier</option>
-          <option value="électricien">Électricien</option>
-          <option value="menuisier">Menuisier</option>
-          <option value="peintre">Peintre</option>
-        </select>
-        <input
-          type="text"
-          name="location"
-          placeholder="Par localisation..."
-          value={filters.location}
-          onChange={handleChange}
-        />
-      </div>
-      <div className="button-group">
-        <button className="search-btn" onClick={handleSearchClick}>
-          🔍 Recherche un artisan
-        </button>
-        <button className="show-btn" onClick={handleShowAllClick}>
-          ↩ Afficher les artisans
-        </button>
+    <div className="artisan-search">
+      <div className="artisan-search__wrapper">
+        <h2 className="artisan-search__title">Recherche d’artisans</h2>
+
+        <div className="artisan-search__grid">
+          {/* Ligne 1 */}
+          <div className="artisan-search__item">
+            <input
+              id="name"
+              type="text"
+              placeholder="Par nom ..."
+              className="input"
+            />
+          </div>
+
+          <div className="artisan-search__item">
+            <select id="rating" className="select">
+              <option value="">Sélectionner une note</option>
+              <option value="5">5 ★</option>
+              <option value="4">4 ★ et plus</option>
+              <option value="3">3 ★ et plus</option>
+              <option value="2">2 ★ et plus</option>
+              <option value="1">1 ★ et plus</option>
+            </select>
+          </div>
+
+          <div className="artisan-search__item">
+            <select id="specialty" className="select">
+              <option value="">Sélectionner une spécialité</option>
+              {metiers.map((metier, index) => (
+                <option key={index} value={metier.toLowerCase()}>
+                  {metier}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          {/* Ligne 2 */}
+          <div className="artisan-search__item">
+            <input
+              id="location"
+              type="text"
+              placeholder="Par localisation"
+              className="input"
+            />
+          </div>
+
+          <div className="artisan-search__item">
+            <button id="searchBtn" type="button" className="btn btn--primary">
+               Recherche un artisan 🔎
+            </button>
+          </div>
+
+          <div className="artisan-search__item">
+            <button id="showBtn" type="button" className="btn btn--secondary">
+               Afficher les artisans ↩︎
+            </button>
+          </div>
+        </div>
       </div>
     </div>
   );
