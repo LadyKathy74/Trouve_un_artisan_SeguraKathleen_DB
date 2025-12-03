@@ -9,23 +9,34 @@
   background-color: #0074c7; // bleu principal
   color: #f1f8fc; // texte clair
   font-family: 'Inter', sans-serif;
-  padding: 2rem 1rem;
+  padding: 2rem 2rem 0; // pas de padding en bas, réservé au footer-bottom
 
   &__content {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
+    justify-content: center;   // 👉 centre toutes les colonnes
+    align-items: center;   // 👉 aligne les colonnes au milieu
     max-width: 1200px;
     margin: 0 auto;
-    gap: 2rem;
+    padding-top: 5rem;
+    gap: 2rem;                 // 👉 espace uniforme entre les colonnes
+    position: relative;
+    z-index: 1;
+    text-align: center;        // 👉 centre le texte dans chaque colonne
   }
 
   &__column {
     flex: 1 1 220px;
+    margin-bottom: 1.5rem;
+    min-width: 200px;
+    padding: 0 1rem;
+    box-sizing: border-box;
+    text-align: center;
+    
 
     h3 {
-      margin-bottom: 0.5rem;
-      font-size: 1.2rem;
+      margin-bottom: 1cm;      // 👉 espace de 1 cm entre le titre et le texte
+      font-size: 1.5rem;
       font-weight: 600;
       color: #f1f8fc;
     }
@@ -40,7 +51,7 @@
       text-decoration: none;
 
       &:hover {
-        color: #cd2c2e; // rouge accent
+        color: #00497c;        // 👉 bleu foncé au survol
         text-decoration: underline;
       }
     }
@@ -55,14 +66,33 @@
     }
   }
 
+  // ✅ Logo principal
+  &__promo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+
+    img {
+      max-width: 300px;        // 👉 Logo.png plus grand
+      height: auto;
+      display: block;
+      filter: brightness(0) invert(1); // 👉 rend l’image blanche
+    }
+  }
+
+  // ✅ Logo ARA réduit
   &__logo {
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 250px;
 
     img {
-      max-width: 150px;
+      max-width: 220px;        // 👉 ARA-Logo réduit
       height: auto;
+      display: block;
+      filter: brightness(0) invert(1); // 👉 rend l’image blanche
     }
   }
 }
@@ -78,5 +108,22 @@
   .footer__column {
     flex: none;
     width: 100%;
+  }
+}
+
+// Wrapper décoratif - Version 2
+.c-footer__wrapper {
+  position: relative;
+
+  &.variant2::before {
+    content: "";
+    position: absolute;
+    top: -2rem;
+    left: 2rem;
+    right: 2rem;
+    height: 4rem;
+    background: #f2f8fc;
+    border-radius: 0 0 50rem 50rem;
+    z-index: 0; // 👉 derrière le contenu, visible au-dessus du fond bleu
   }
 }

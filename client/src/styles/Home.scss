@@ -23,7 +23,7 @@
         margin: 0 0 0.5rem 0;
         font-size: 2rem;
         line-height: 1.1;
-        color: #0f1f2f;
+        color: #00497c;
         position: relative;
         padding-left: 0;
       }
@@ -37,21 +37,45 @@
         width: 3cm;
         max-width: 100%;
         height: 4px;
-        background: #00a550;
+        background: #82b864;
         border-radius: 2px;
       }
 
+      /* Liste avec numéros en rond bleu */
       .home__steps,
       ol {
-        margin: 1rem 0 0 1.25rem;
+        list-style: none;
+        counter-reset: step;
+        margin: 2.5rem 0 0 1.25rem;
         color: #334155;
+
+        li {
+          counter-increment: step;
+          margin-bottom: 0.75rem;
+          display: flex;
+          align-items: center;
+
+          &::before {
+            content: counter(step);
+            background-color: #0074c7;
+            color: #fff;
+            border-radius: 50%;
+            width: 1.5rem;
+            height: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.5rem;
+            font-weight: 600;
+          }
+        }
       }
     }
 
     &-image {
-      flex: 0 0 320px;
+      flex: 0 0 600px;
       img {
-        max-width: 100%;
+        max-width: 120%;
         height: auto;
         display: block;
       }
@@ -60,13 +84,13 @@
 
   /* SECTION ARTISANS */
   &__featured {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
 
     .home__subtitle,
     h2 {
-      margin: 0 0 1rem 0;
+      margin: 0 0 3rem 0;
       font-size: 1.5rem;
-      color: #0f1f2f;
+      color: #00497c;
       position: relative;
       padding-left: 0;
     }
@@ -80,27 +104,24 @@
       width: 3cm;
       max-width: 100%;
       height: 4px;
-      background: #00a550;
+      background: #cd2c2e;
       border-radius: 2px;
     }
 
-    /* Grille : chaque cellule étire son contenu, cartes de même hauteur */
     .home__artisan-list {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 1rem;
-      align-items: stretch; /* étire les cellules verticalement */
+      gap: 3rem;
+      align-items: stretch;
       margin-top: 1rem;
     }
 
-    /* chaque item devient un conteneur flex pour forcer la carte à 100% */
     .home__artisan-item {
       display: flex;
       align-items: stretch;
       justify-content: stretch;
     }
 
-    /* si vous utilisez .home__artisan-item > ArtisanCard, la carte doit avoir height:100% */
     .home__artisan-item > .artisan-card {
       height: 100%;
     }
@@ -111,7 +132,7 @@
 @include respond-to(lg) { /* ≤ 1024px */
   .home__intro {
     &-image {
-      flex: 0 0 260px;
+      flex: 0 0 600px;
     }
   }
 }
@@ -136,7 +157,6 @@
     }
   }
 
-  /* limiter la largeur visuelle de la ligne sur petits écrans */
   .home__title::after,
   .home__subtitle::after,
   h1::after,
@@ -167,3 +187,5 @@
     width: min(3cm, 50%);
   }
 }
+
+

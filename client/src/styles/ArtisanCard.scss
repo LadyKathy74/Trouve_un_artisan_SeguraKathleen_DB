@@ -1,10 +1,7 @@
 @import 'variables';
 @import 'mixins';
 
-/* ArtisanCard.scss
-   Variables attendues : $color-blue-light, $color-blue-primary, $color-blue-dark, $color-gray-dark, $font-family-base
-   Remplacez les variables par des valeurs hex si vous n'utilisez pas de variables.
-*/
+/* ArtisanCard.scss*/
 
 .artisan-card {
   /* structure générale */
@@ -18,20 +15,20 @@
   border-radius: 14px;
   background: $color-blue-light; /* fallback: #f1f8fc */
   border: 2px solid $color-blue-primary; /* fallback: #0074c7 */
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.30);
   font-family: $font-family-base;
-  color: $color-blue-dark;
+  color: $color-gray-dark;
   transition: transform 0.18s ease, box-shadow 0.18s ease;
 
   &:hover,
   &:focus-within {
     transform: translateY(-6px);
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.30);
   }
 
   /* header : note + catégorie */
   &__header,
-  .artisan-card-top { /* compatibilité avec anciennes classes */
+  .artisan-card-top { 
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -52,7 +49,7 @@
       display: inline-block;
       font-size: 18px;
       line-height: 1;
-      color: #e3e7ee; /* vide */
+      color: $color-gray-light; /* vide */
       transition: color 0.12s ease, transform 0.12s ease;
     }
 
@@ -66,7 +63,7 @@
   &__category,
   .artisan-category {
     font-weight: 600;
-    color: $color-blue-dark;
+    color: $color-gray-dark;
     background: #f0f6ff;
     border: 1px solid #d6e7ff;
     padding: 6px 10px;
@@ -81,7 +78,7 @@
     margin: 0;
     font-size: 18px;
     font-weight: 700;
-    color: #0f1f2f;
+    color: #0074c7;
   }
 
   /* description : prend l'espace restant pour aligner le footer */
@@ -89,10 +86,10 @@
   .artisan-description {
     margin: 0;
     font-size: 14px;
-    color: $color-gray-dark;
+    color: $color-gray-light;
     line-height: 1.45;
     flex: 1 1 auto; /* s'étire pour uniformiser la hauteur des cartes */
-    min-height: 48px;
+    min-height: 50px;
   }
 
   /* footer / localisation */
@@ -101,7 +98,11 @@
   .artisan-location {
     margin-top: 8px;
     font-size: 14px;
-    color: $color-gray-dark;
+    color: $color-blue-primary;
+    display: inline-flex;
+    justify-content: space-around;
+    align-items: center;
+    gap: 6px;
     font-weight: 600;
     flex: 0 0 auto;
   }
