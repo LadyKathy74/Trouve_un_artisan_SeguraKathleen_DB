@@ -1,134 +1,188 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import "../styles/ContactForm.scss";
+// ContactForm.jsx
+import React, { useState } from 'react';
+import '../styles/ContactForm.scss';
+import Logo from "../assets/images/email.png";
+
+const initialField = { value: '', state: 'idle', error: '' };
+
+const VALIDATION = {
+  nom: (v) => {
+    const trimmed = v.trim();
+    if (trimmed.length < 2) return 'Le nom doit contenir au moins 2 caractères.';
+    const rx = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]+$/u;
+    if (!rx.test(trimmed)) return 'Le nom contient des caractères non autorisés.';
+    return '';
+  },
+  email: (v) => {
+    const trimmed = v.trim();
+    const rx = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!rx.test(trimmed)) return 'Veuillez saisir une adresse email valide.';
+    return '';
+  },
+  objet: (v) => {
+    const trimmed = v.trim();
+    if (trimmed.length < 3) return 'L’objet doit contenir au moins 3 caractères.';
+    return '';
+  },
+  message: (v) => {
+    const trimmed = v.trim();
+    if (trimmed.length < 10) return 'Le message doit contenir au moins 10 caractères.';
+    return '';
+  },
+};
+
+const Field = ({ id, label, type = 'text', required = true, field, setField, placeholder, as = 'input' }) => {
+  const onChange = (e) => {
+    const value = e.target.value;
+    setField((prev) => ({ ...prev, value, state: 'editing', error: '' }));
+  };
+
+  const onBlur = () => {
+    const error = VALIDATION[id](field.value);
+    setField((prev) => ({ ...prev, error, state: error ? 'error' : 'success' }));
+  };
+
+  const onFocus = () => {
+    setField((prev) => ({ ...prev, state: prev.state === 'success' ? 'success' : 'editing' }));
+  };
+
+  const className = [
+    'form-field',
+    field.state === 'editing' && 'is-editing',
+    field.state === 'error' && 'is-error',
+    field.state === 'success' && 'is-success',
+  ].filter(Boolean).join(' ');
+
+  const ariaDescribedBy = `${id}-help`;
+
+  return (
+    <div className={className}>
+      <label htmlFor={id} className="form-label">
+        {label}{required && <span aria-hidden="true" className="req-star">*</span>}
+      </label>
+
+      {as === 'textarea' ? (
+        <textarea
+          id={id}
+          name={id}
+          required={required}
+          value={field.value}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          aria-invalid={field.state === 'error'}
+          aria-describedby={ariaDescribedBy}
+          rows={6}
+          className="form-control"
+        />
+      ) : (
+        <input
+          id={id}
+          name={id}
+          type={type}
+          required={required}
+          value={field.value}
+          onChange={onChange}
+          onBlur={onBlur}
+          onFocus={onFocus}
+          placeholder={placeholder}
+          aria-invalid={field.state === 'error'}
+          aria-describedby={ariaDescribedBy}
+          className="form-control"
+        />
+      )}
+
+      <div className="field-feedback" id={ariaDescribedBy}>
+        {field.state === 'editing' && (
+          <>
+            <span className="icon icon--info" aria-hidden="true" />
+            <span className="feedback-text">Saisie en cours…</span>
+          </>
+        )}
+        {field.state === 'error' && (
+          <>
+            <span className="icon icon--error" aria-hidden="true" />
+            <span className="feedback-text">{field.error}</span>
+          </>
+        )}
+        {field.state === 'success' && (
+          <>
+            <span className="icon icon--success" aria-hidden="true" />
+            <span className="feedback-text">Champ valide.</span>
+          </>
+        )}
+      </div>
+    </div>
+  );
+};
 
 export default function ContactForm() {
-  const [fields, setFields] = useState({
-    name: "",
-    email: "",
-    object: "",
-    message: "",
-  });
+  const [nom, setNom] = useState(initialField);
+  const [email, setEmail] = useState(initialField);
+  const [objet, setObjet] = useState(initialField);
+  const [message, setMessage] = useState(initialField);
+  const [submitted, setSubmitted] = useState(false);
 
-  const [errors, setErrors] = useState({});
-  const [touched, setTouched] = useState({});
+  const allValid =
+    nom.state === 'success' &&
+    email.state === 'success' &&
+    objet.state === 'success' &&
+    message.state === 'success';
 
-  const validate = () => {
-    let newErrors = {};
-
-    if (!fields.name.trim()) newErrors.name = "Champ incorrect";
-    if (!fields.email.match(/^[^@]+@[^@]+\.[^@]+$/))
-      newErrors.email = "Champ incorrect";
-    if (!fields.object.trim()) newErrors.object = "Champ incorrect";
-    if (fields.message.trim().length < 5)
-      newErrors.message = "Champ incorrect";
-
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
-
-  const handleChange = (e) => {
-    setFields({ ...fields, [e.target.name]: e.target.value });
-  };
-
-  const handleBlur = (e) => {
-    setTouched({ ...touched, [e.target.name]: true });
-    validate();
-  };
-
-  const handleSubmit = (e) => {
+  const onSubmit = (e) => {
     e.preventDefault();
-    if (validate()) {
-      alert("Formulaire envoyé !");
+    const nextNomErr = VALIDATION.nom(nom.value);
+    const nextEmailErr = VALIDATION.email(email.value);
+    const nextObjetErr = VALIDATION.objet(objet.value);
+    const nextMessageErr = VALIDATION.message(message.value);
+
+    setNom((p) => ({ ...p, error: nextNomErr, state: nextNomErr ? 'error' : 'success' }));
+    setEmail((p) => ({ ...p, error: nextEmailErr, state: nextEmailErr ? 'error' : 'success' }));
+    setObjet((p) => ({ ...p, error: nextObjetErr, state: nextObjetErr ? 'error' : 'success' }));
+    setMessage((p) => ({ ...p, error: nextMessageErr, state: nextMessageErr ? 'error' : 'success' }));
+
+    if (!nextNomErr && !nextEmailErr && !nextObjetErr && !nextMessageErr) {
+      setSubmitted(true);
     }
   };
 
-  const getStatus = (field) => {
-    if (!touched[field]) return "default";
-    if (errors[field]) return "error";
-    return "success";
+  const onBack = () => {
+    setNom(initialField);
+    setEmail(initialField);
+    setObjet(initialField);
+    setMessage(initialField);
+    setSubmitted(false);
   };
 
   return (
-    <form className="contact-card" onSubmit={handleSubmit}>
-      <h2>Contactez l’artisan</h2>
-      <p className="subtitle">Les champs marqués d’un astérisque (*) sont requis.</p>
+    <div className="contact-wrapper">
+      <form className="contact-form" onSubmit={onSubmit} noValidate>
+        <div className="form-header">
+          <img src={Logo} alt="Logo email" className="form-logo" />
+          <h2 className="form-title">Contactez l’artisan</h2>
+        </div>
 
-      {/* NOM */}
-      <div className={`field ${getStatus("name")}`}>
-        <label>Nom*</label>
-        <input
-          type="text"
-          name="name"
-          value={fields.name}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder=" "
-        />
-        {errors.name && <span className="msg error">*Champ incorrect</span>}
-        {!errors.name && touched.name && (
-          <span className="msg success">*Champ validé</span>
+        <Field id="nom" label="Nom" field={nom} setField={setNom} placeholder="Votre nom" />
+        <Field id="email" label="Email" type="email" field={email} setField={setEmail} placeholder="exemple@domaine.fr" />
+        <Field id="objet" label="Objet" field={objet} setField={setObjet} placeholder="Sujet de votre demande" />
+        <Field id="message" label="Message" field={message} setField={setMessage} placeholder="Décrivez votre demande" as="textarea" />
+
+        <p className="privacy-note">
+          Les informations recueillies à partir de ce formulaire sont nécessaires aux services de la région Auvergne‑Rhône‑Alpes pour la gestion de votre demande.
+        </p>
+
+        <div className="form-actions">
+          <button type="button" className="btn btn--secondary" onClick={onBack}>Retour</button>
+          <button type="submit" className="btn btn--primary" disabled={!allValid}>Envoyer</button>
+        </div>
+
+        {submitted && (
+          <div className="submit-feedback" role="status">
+            Votre demande a été envoyée avec succès.
+          </div>
         )}
-      </div>
-
-      {/* EMAIL */}
-      <div className={`field ${getStatus("email")}`}>
-        <label>Email*</label>
-        <input
-          type="text"
-          name="email"
-          value={fields.email}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder=" "
-        />
-        {errors.email && <span className="msg error">*Champ incorrect</span>}
-        {!errors.email && touched.email && (
-          <span className="msg success">*Champ validé</span>
-        )}
-      </div>
-
-      {/* OBJET */}
-      <div className={`field ${getStatus("object")}`}>
-        <label>Objet*</label>
-        <input
-          type="text"
-          name="object"
-          value={fields.object}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder=" "
-        />
-        {errors.object && <span className="msg error">*Champ incorrect</span>}
-        {!errors.object && touched.object && (
-          <span className="msg success">*Champ validé</span>
-        )}
-      </div>
-
-      {/* MESSAGE */}
-      <div className={`field textarea ${getStatus("message")}`}>
-        <label>Message*</label>
-        <textarea
-          name="message"
-          value={fields.message}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          placeholder="Écrivez votre message ici..."
-        />
-        {errors.message && <span className="msg error">*Champ incorrect</span>}
-        {!errors.message && touched.message && (
-          <span className="msg success">*Message validé</span>
-        )}
-      </div>
-
-      <p className="info">
-        Les informations recueillies sont nécessaires aux services de la Région.
-      </p>
-
-      <div className="buttons">
-        <button type="button" className="back">Retour</button>
-        <button type="submit" className="send">Envoyer</button>
-      </div>
-    </form>
+      </form>
+    </div>
   );
 }

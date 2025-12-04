@@ -1,147 +1,155 @@
-@import '../styles/_mixins.scss';
-@import '../styles/_variables.scss';
+/* ContactForm.scss modernisé avec variables & mixins */
+@import 'variables';
+@import 'mixins';
 
+.contact-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid $color-blue-primary;
+  border-radius: 30px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.50);
+  background: $color-blue-light;
+  padding: 40px;
+  max-width: 900px;
+  margin: 40px auto;
+  @include font-base;
+}
 
-.contact-card {
+.contact-form {
   width: 100%;
-  max-width: 520px;
-  margin: auto;
-  background: $color-blue-light; // #f1f8fc
-  border: 2px solid $color-blue-primary; // #0074c7
-  padding: 30px 32px;
-  border-radius: 14px;
-  font-family: $font-family-base;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  max-width: 800px;
+  text-align: center;
 
-  h2 {
+  .form-header {
     text-align: center;
-    color: $color-blue-dark; // #00497c
-    font-size: 22px;
-    margin-bottom: 4px;
+    margin-bottom: 30px;
+
+    .form-logo {
+      width: 80px;
+      height: auto;
+      margin-bottom: 15px;
+    }
+
+    .form-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: $color-blue-primary;
+      margin: 0;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+.form-field {
+  margin-bottom: 20px;
+
+  .form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: 5px;
+    font-size: 0.95rem;
+    text-align: left;            // label aligné à gauche
+    max-width: 500px;            // largeur cohérente avec l’input
+    margin: 0 auto 5px;          // centre le bloc mais texte à gauche
+    color: $color-blue-dark;     // bleu foncé #00497c
   }
 
-  .subtitle {
-    text-align: center;
-    font-size: 13px;
-    color: $color-gray-dark; // #384050
-    margin-bottom: 20px;
+  .req-star {
+    color: $color-red-accent;
+    margin-left: 6px;
+    font-weight: 700;
   }
 
-  .field {
+  .form-control {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 14px 16px;
+    border: 2px solid $color-blue-dark; // bordure bleu foncé
+    border-radius: 12px;
+    background: #fff;
+    @include font-base;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.2s ease;
+
+    &:focus {
+      border-color: $color-blue-dark;
+      box-shadow: 0 0 0 4px rgba($color-blue-dark, 0.15);
+    }
+  }
+
+  .field-feedback {
     display: flex;
-    flex-direction: column;
-    margin-bottom: 18px;
-    position: relative;
-
-    label {
-      font-size: 14px;
-      margin-bottom: 6px;
-      color: $color-gray-dark;
-      font-weight: 600;
-    }
-
-    input,
-    textarea {
-      border: 2px solid lighten($color-blue-primary, 30%); // #a7c8e8
-      border-radius: 8px;
-      padding: 10px 12px;
-      font-size: 15px;
-      outline: none;
-      transition: 0.2s;
-
-      &:focus {
-        border-color: $color-blue-dark;
-      }
-    }
-
-    textarea {
-      height: 100px;
-      resize: none;
-    }
-
-    .msg {
-      font-size: 13px;
-      margin-top: 4px;
-
-      &.error {
-        color: $color-red-accent; // #cd2c2e
-      }
-
-      &.success {
-        color: $color-green-light; // #82b864
-      }
-    }
-
-    /* États */
-    &.default input,
-    &.default textarea {
-      border-color: lighten($color-blue-primary, 30%);
-    }
-
-    &.error input,
-    &.error textarea {
-      border-color: $color-red-accent;
-    }
-
-    &.success input,
-    &.success textarea {
-      border-color: $color-green-light;
-    }
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    font-size: 0.9rem;
   }
 
-  .info {
-    font-size: 12.5px;
-    color: $color-gray-dark;
-    margin: 15px 0 25px;
-    line-height: 1.4;
+  .icon {
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-block;
+
+    &--info { background: $color-blue-primary; }
+    &--error { background: $color-red-accent; }
+    &--success { background: $color-green-light; }
   }
 
-  .buttons {
-    display: flex;
-    justify-content: space-between;
+  &.is-editing .form-control { border-color: $color-blue-primary; }
+  &.is-error .form-control { border-color: $color-red-accent; box-shadow: 0 0 0 4px rgba($color-red-accent, 0.12); }
+  &.is-success .form-control { border-color: $color-green-light; box-shadow: 0 0 0 4px rgba($color-green-light, 0.12); }
 
-    button {
-      padding: 10px 20px;
-      font-size: 15px;
-      border-radius: 8px;
-      border: none;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.2s;
+  &.is-editing .field-feedback { color: $color-blue-primary; }
+  &.is-error .field-feedback { color: $color-red-accent; }
+  &.is-success .field-feedback { color: $color-green-light; }
+}
+
+.privacy-note {
+  margin: 20px 0;
+  color: $color-gray-light;
+  line-height: 1.6;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  align-items: center;
+  margin-top: 20px;
+
+  .btn {
+    @include button-style($color-gray-light, $color-gray-dark);
+
+    &--secondary {
+      @include button-style($color-gray-light, $color-gray-dark);
     }
 
-    .back {
-      background: lighten($color-blue-light, 5%); // #e2ecf4
-      color: darken($color-blue-dark, 20%); // #294b63
+    &--primary {
+      @include button-style($color-blue-dark, #fff); // bouton principal en bleu foncé
 
-      &:hover {
-        background: lighten($color-blue-light, 10%); // #d0e0ed
-      }
-    }
-
-    .send {
-      background: $color-blue-primary;
-      color: #fff;
-
-      &:hover {
-        background: $color-blue-dark;
+      &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
       }
     }
   }
 }
 
-/* 📱 Responsive avec mixins */
-@include respond-to(sm) {
-  .contact-card {
-    padding: 22px;
-
-    .buttons {
-      flex-direction: column;
-      gap: 12px;
-
-      button {
-        width: 100%;
-      }
-    }
-  }
+.submit-feedback {
+  margin-top: 20px;
+  padding: 14px;
+  border-radius: 12px;
+  background: rgba($color-green-light, 0.08);
+  color: $color-green-light;
+  border: 1px solid $color-green-light;
+  text-align: center;
+  font-weight: 600;
 }
